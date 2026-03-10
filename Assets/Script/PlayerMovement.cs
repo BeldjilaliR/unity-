@@ -34,7 +34,8 @@ public class PlayerMovement : MonoBehaviour
 private bool wasGrounded = false;
     private bool jumpRequested = false;
     private bool jumpReleased = false;
-
+    [SerializeField] 
+    private Animator animator;
     private void Jump()
     {
         nbJumps++;
@@ -69,12 +70,16 @@ private bool wasGrounded = false;
         {
             nbJumps = 0;
         }
- 
+        Animations();
         wasGrounded = isGrounded;
- 
-    
+       
     }
 
+
+void Animations ()
+{
+    animator.SetFloat("VelocityX", Mathf.Abs(rb.linearVelocityX));
+}
     private void FixedUpdate()
     {
         Move();
